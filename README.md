@@ -3,8 +3,8 @@
 Desenvolvimento de API que contenha os dados dos planetas do mundo Star Wars.
 ### Tecnologias
 - FrameWork Spring Boot versão 1.5.6.
-- Java versão 1.8
-- Mongodb 4.0.2
+- Java versão 1.8.
+- Mongodb vesão 4.0.2.
 
 ### Requisitos
 - API REST
