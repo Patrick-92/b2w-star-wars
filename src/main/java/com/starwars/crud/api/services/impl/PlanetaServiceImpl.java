@@ -1,14 +1,24 @@
 package com.starwars.crud.api.services.impl;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.starwars.crud.api.documents.Planeta;
 import com.starwars.crud.api.repositories.PlanetaRepository;
 import com.starwars.crud.api.services.PlanetaService;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 @Service
 public class PlanetaServiceImpl implements PlanetaService {
@@ -16,23 +26,28 @@ public class PlanetaServiceImpl implements PlanetaService {
 	@Autowired
 	private PlanetaRepository planetaRepository;
 	
+	private static final String urlSwapi = "https://swapi.co/api/planets/?search=";
+	
 	@Override
 	public List<Planeta> listarTodos() {
 		return this.planetaRepository.findAll();
 	}
 
 	@Override
-	public Optional<Planeta> listarPorId(String id) {
-		return this.planetaRepository.findById(id);
+	public Planeta listarPorId(String id) {
+		return this.planetaRepository.findOne(id);
 	}
 	
 	@Override
-	public Optional<Planeta> listarPorNome(String nome) {
-		return this.planetaRepository.findById(nome);
+	public Planeta listarPorNome(String nome) {
+		return this.planetaRepository.findOne(nome);
 	}
 
 	@Override
 	public Planeta cadastrar(Planeta planeta) {
+		Integer qtdAparicoes = this.aparicoes(planeta.getNome());
+		//System.out.println(qtdAparicoes);
+		planeta.setAparicoes(qtdAparicoes.toString());
 		return this.planetaRepository.save(planeta);
 	}
 
@@ -40,10 +55,47 @@ public class PlanetaServiceImpl implements PlanetaService {
 	public Planeta atualizar(Planeta planeta) {
 		return this.planetaRepository.save(planeta);
 	}
+	
+	private Integer aparicoes(String nome) {
+		StringBuilder url = new StringBuilder();
+		RestTemplate restTemplate = new RestTemplate();
+		Object ObjetoGenerico;
+		HttpHeaders headers = new HttpHeaders();
+		Gson gson = new Gson();
+		JsonElement arrayAparicoes = null;
+		
+		url.append(urlSwapi).append(nome);
+
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.add("user-agent",
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+
+		try {
+			ObjetoGenerico = restTemplate.exchange(url.toString(), HttpMethod.GET,
+					new HttpEntity<String>("parameters", headers), Object.class);
+		} catch (Exception e) {
+			return null;
+		}
+
+		JsonArray resultado = gson.fromJson(gson.toJson(ObjetoGenerico), JsonObject.class).getAsJsonObject("body")
+				.getAsJsonArray("results");
+
+		for (JsonElement e : resultado) {
+			if (e.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(nome)) {
+				arrayAparicoes = e;
+			}
+		}
+
+		if (arrayAparicoes == null) {
+			return 0;
+		} else {
+			return arrayAparicoes.getAsJsonObject().getAsJsonArray("films").size();
+		}
+	}
 
 	@Override
 	public void remover(String id) {
-		this.planetaRepository.deleteById(id);
+		this.planetaRepository.delete(id);
 	}
 
 }
