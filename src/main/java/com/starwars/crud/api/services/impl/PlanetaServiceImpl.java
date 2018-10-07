@@ -46,7 +46,6 @@ public class PlanetaServiceImpl implements PlanetaService {
 	@Override
 	public Planeta cadastrar(Planeta planeta) {
 		Integer qtdAparicoes = this.aparicoes(planeta.getNome());
-		//System.out.println(qtdAparicoes);
 		planeta.setAparicoes(qtdAparicoes.toString());
 		return this.planetaRepository.save(planeta);
 	}
