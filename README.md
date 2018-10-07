@@ -14,7 +14,7 @@ Desenvolvimento de API que contenha os dados dos planetas do mundo Star Wars.
   - Terreno
   - Aparições - (número de filmes em que o planeta apareceu)
   
-Obs.: O dado da coluna "Aparições" serão preenchido atarvés da API pública do Star Wars: https://swapi.co/
+Obs.: Os dados da coluna "Aparições" serão preenchidos atarvés da API pública do Star Wars: https://swapi.co/
 
 ### Funcionalidades
 - Adicionar um planeta (com nome, clima e terreno)
