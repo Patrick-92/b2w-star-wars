@@ -40,7 +40,6 @@ public class PlanetaController {
 				System.out.println(planeta.getNome());
 			}
 		}
-		//System.out.println(this.planetaService.listarTodos().get(0).getNome());
 
 		return ResponseEntity.ok(new Response<Planeta>(this.planetaService.listarPorId(id)));
 	}
