@@ -23,6 +23,6 @@ Obs.: Os dados da coluna "Aparições" serão preenchidos atarvés da API públi
 - Buscar por ID - http://localhost:8080/api/planetas/[id_do_planeta]
 - Remover planeta - http://localhost:8080/api/planetas/[id_do_planeta]
 
-Obs.: Dados são retornados em formato JSON
+Obs.: Dados são retornados em formato JSON.
 
 Backup do banco de dados incluso no projeto.
