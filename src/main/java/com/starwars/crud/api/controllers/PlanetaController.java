@@ -60,8 +60,11 @@ public class PlanetaController {
 			List<String> erros = new ArrayList<String>();
 			result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(new Response<Planeta>(erros));
-		} 
-		
+		} if (this.planetaService.cadastrar(planeta) == null) {
+			List<String> erros = new ArrayList<String>();
+			erros.add("Características do planeta não existem no universo Star Wars!");
+			return ResponseEntity.badRequest().body(new Response<Planeta>(erros));
+		}
 		return ResponseEntity.ok(new Response<Planeta>(this.planetaService.cadastrar(planeta)));
 	}
 	

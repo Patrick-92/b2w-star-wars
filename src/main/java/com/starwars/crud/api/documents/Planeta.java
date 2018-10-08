@@ -26,7 +26,6 @@ public class Planeta {
 		this.id = id;
 	}
 
-	//@javax.validation.constraints.NotEmpty
 	@NotEmpty(message = "Nome não pode ser vazio")
 	public String getNome() {
 		return nome;
@@ -36,7 +35,6 @@ public class Planeta {
 		this.nome = nome;
 	}
 
-	//@javax.validation.constraints.NotEmpty
 	@NotEmpty(message = "Clima não pode ser vazio")
 	public String getClima() {
 		return clima;
@@ -46,7 +44,6 @@ public class Planeta {
 		this.clima = clima;
 	}
 
-	//@javax.validation.constraints.NotEmpty
 	@NotEmpty(message = "Terreno não pode ser vazio")
 	public String getTerreno() {
 		return terreno;
@@ -56,7 +53,6 @@ public class Planeta {
 		this.terreno = terreno;
 	}
 
-	//@javax.validation.constraints.NotEmpty
 	public String getAparicoes() {
 		return aparicoes;
 	}
