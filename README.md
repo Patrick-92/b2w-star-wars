@@ -18,9 +18,11 @@ Obs.: Os dados da coluna "Aparições" serão preenchidos atarvés da API públi
 
 ### Funcionalidades
 - Adicionar um planeta (com nome, clima e terreno)
-- Listar planetas
-- Buscar por nome
-- Buscar por ID
-- Remover planeta
+- Listar planetas - http://localhost:8080/api/planetas/
+- Buscar por nome - http://localhost:8080/api/planetas/nome/[nome_do_planeta]
+- Buscar por ID - http://localhost:8080/api/planetas/[id_do_planeta]
+- Remover planeta - http://localhost:8080/api/planetas/[id_do_planeta]
 
-Obs.: backup do banco de dados incluso no projeto.
+Obs.: Dados são retornados em formato JSON
+
+Backup do banco de dados incluso no projeto.
