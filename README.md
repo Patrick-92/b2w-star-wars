@@ -23,6 +23,14 @@ Obs.: Os dados da coluna "Aparições" serão preenchidos atarvés da API públi
 - Buscar por ID - http://localhost:8080/api/planetas/[id_do_planeta]
 - Remover planeta - http://localhost:8080/api/planetas/[id_do_planeta]
 
-Obs.: Dados são retornados em formato JSON.
+### Entrada de dados
+No momento do cadastro as informações serão enviadas em formato JSON, respeitando algumas restrições de envio:
+{
+  "nome":"[nome_do planeta]"
+  "clima":"[tipos_de_clima]" -> se tipos de clima > 1 a separação de entre os tipos deverá ser por vírgulas. Ex.: "tipo1, tipo2"
+  "terreno":"[tipos_de_terreno]" -> se tipos de terreno > 1 a separação de entre os tipos deverá ser por vírgulas. Ex.: "tipo1, tipo2"
+}
+
+Os Dados nas buscas por id e por nome são retornados em formato JSON. A alteração na ordem de envio dos componentes do formulário não causa erro na execução do cadastro. 
 
 Backup do banco de dados incluso no projeto.
